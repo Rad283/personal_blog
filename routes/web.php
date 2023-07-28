@@ -31,6 +31,11 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+Route::get('/template', function () {
+    return view('components.template', [
+        'website' => website::first(),
+    ]);
+});
 Route::get('/', function () {
     return view('welcome', [
         'website' => DB::table('websites')->first(),
@@ -45,16 +50,20 @@ Route::get('/', function () {
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard', [
+            'post' => post::all()
+        ]);
     })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::resources([
         'website' => WebsiteController::class,
         'about' => AboutController::class,
         'kategori' => KategoriController::class,
-        'post' => PostController::class,
     ]);
+    Route::resource('post', PostController::class)->except(['show']);
 });
+
+Route::get('post/detail/{post}', [PostController::class, 'show'])->name('post.show');
 
 Route::view('/about', 'about', [
     'website' => DB::table('websites')->first(),

@@ -109,7 +109,7 @@
                             <div>
                                 <br>
                                 <label for="kategori_id">Pilih kategori postingan</label>
-                                <select name="kategori_id" id="kategori_id">
+                                <select name="kategori_id" id="kategori_id" style="color:black">
                                     @foreach ($kategori as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                     @endforeach

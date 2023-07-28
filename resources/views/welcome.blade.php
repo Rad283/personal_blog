@@ -1,9 +1,8 @@
-<x-template>
-    @include('layouts/navbar')
-    <header class="headerimg">
-        <img src="{{ asset('storage/' . $website->header_image) }}" class="responsive" />
+@extends('layouts.template')
+@section('content')
+    <header class="headerimg" style="background-image: url({{ asset('storage' . $website->header_image) }});">
+        <img src="{{ asset('storage' . $website->header_image) }}" class="responsive" />
     </header>
-
     <p style="background-color: rgb(30,30,30);width: auto;height: auto;">
         ㅤ
     </p>
@@ -17,26 +16,49 @@
             @foreach ($post as $item)
                 @inject('post', 'Illuminate\Support\Str')
                 <div class="col">
-                    <div class="card h-100" style="background-color: rgb(62,62,66);"><img
-                            class="card-img-top w-100 d-block fit-cover" style="height: 200px;"
-                            src="{{ asset('storage' . $item->thumbnail) }}">
-                        <div class="card-body p-4">
-                            <p class="text-primary card-text mb-0">{{ $item->nama }}</p>
-                            <h4 class="card-title">{{ $item->judul }}</h4>
-                            <p class="card-text">@php
-                                $postingan = strip_tags($item->postingan);
-                                echo Str::limit($postingan, 120);
-                            @endphp</p>
+                    <div class="card h-100" style="background-color: #2d2d30;">
+                        <a href="{{ route('post.show', $item->id) }}" style="color: white" class="text-decoration-none">
+                            <div>
+                                <img class="card-img-top w-100 d-block fit-cover" style="height: 200px;"
+                                    src="{{ asset('storage' . $item->thumbnail) }}">
+                            </div>
+                            <div class="card-body p-4">
+                                <h4 class="card-title">
+                                    @php
+                                        $postingan = strip_tags($item->judul);
+                                        echo Str::limit($postingan, 50);
+                                    @endphp</p>
+                                </h4>
 
-                        </div>
+
+                                <p class="card-text">@php
+                                    $postingan = strip_tags($item->postingan);
+                                    echo Str::limit($postingan, 100);
+                                @endphp</p>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="card-footer"
+                                style=" position: absolute;
+                            bottom: 0;
+                            width: 100%;
+                            ">
+                                <center>
+                                    <p class="text-primary">{{ $item->nama }}</p>
+                                </center>
+                            </div>
+
+
+
+                        </a>
                     </div>
                 </div>
             @endforeach
-
         </div>
+
+
+    </div>
     </div>
     <br>
     <br>
-
-    @include('layouts/footer')
-</x-template>
+@endsection

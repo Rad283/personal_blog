@@ -16,16 +16,15 @@
 
 </head>
 
-<body style="background-color:rgb(45,45,48);color: white;">
-    <div style="min-height:100vh">
+<body style="background-color:#252526;color: white;">
+    @include('layouts.navbar')
+    <div style="min-height: 85vh">
 
-
-
-
-        {{ $slot }}
-
+        @yield('content')
 
     </div>
+    @include('layouts.footer')
+
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

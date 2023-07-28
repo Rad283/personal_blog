@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\kategori;
 use App\Models\post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -49,7 +50,10 @@ class PostController extends Controller
      */
     public function show(post $post)
     {
-        //
+        return view('detail', [
+            'website' => DB::table('websites')->first(),
+            'post' => $post
+        ]);
     }
 
     /**
@@ -73,6 +77,7 @@ class PostController extends Controller
      */
     public function destroy(post $post)
     {
-        //
+        $post->delete();
+        return to_route('dashboard');
     }
 }
