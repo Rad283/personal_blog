@@ -21,7 +21,7 @@
                             class="card-img-top w-100 d-block fit-cover" style="height: 200px;"
                             src="{{ asset('storage' . $item->thumbnail) }}">
                         <div class="card-body p-4">
-                            <p class="text-primary card-text mb-0">{{ $item->kategori->nama }}</p>
+                            <p class="text-primary card-text mb-0">{{ $item->nama }}</p>
                             <h4 class="card-title">{{ $item->judul }}</h4>
                             <p class="card-text">@php
                                 $postingan = strip_tags($item->postingan);

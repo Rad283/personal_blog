@@ -8,6 +8,7 @@ use App\Http\Controllers\WebsiteController;
 use App\Models\about;
 use App\Models\post;
 use App\Models\website;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +33,11 @@ require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
     return view('welcome', [
-        'website' => website::all()->first(),
-        'post' => post::with('kategori')->get()
+        'website' => DB::table('websites')->first(),
+
+        'post' => DB::table('posts')
+            ->join('kategoris', 'posts.kategori_id', '=', 'kategoris.id')
+            ->select('posts.*', 'kategoris.nama')->get()
     ]);
 })->name('welcome');
 
@@ -53,6 +57,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 Route::view('/about', 'about', [
-    'website' => website::first(),
-    'about' => about::first()
+    'website' => DB::table('websites')->first(),
+    'about' => DB::table('abouts')->first()
 ])->name('about');
