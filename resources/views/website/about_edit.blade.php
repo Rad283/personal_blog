@@ -5,7 +5,7 @@
         tinymce.init({
             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
             plugins: 'code table lists | image | link',
-            toolbar: 'undo redo | formatselect |fontfamily fontsize blocks bold italic | alignleft aligncenter alignright alignjustify| indent outdent | bullist numlist |  link|table| image | code ',
+            toolbar: 'undo redo | formatselect |fontfamily fontsize blocks bold italic alignleft aligncenter alignright alignjustify| indent outdent | bullist numlist |  link image |  | code ',
             promotion: false,
             branding: false,
             image_title: true,
