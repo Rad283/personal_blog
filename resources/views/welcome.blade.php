@@ -19,21 +19,42 @@
                     <div class="card h-100" style="background-color: #2d2d30;">
                         <a href="{{ route('post.show', $item->id) }}" style="color: white" class="text-decoration-none">
                             <div>
+                                {{-- thumbnail diambil dari tag image  --}}
+                                @php
+                                    $htmlContent = $item->postingan;
+                                    preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', $htmlContent, $match);
+                                    if (empty($match)) {
+                                        $gambar_src = 'no-image.png';
+                                    } else {
+                                        $gambar_src = $match[1];
+                                    }
+                                    
+                                @endphp
                                 <img class="card-img-top w-100 d-block fit-cover" style="height: 200px;"
-                                    src="{{ asset('storage' . $item->thumbnail) }}">
+                                    src="{{ $gambar_src }}">
                             </div>
                             <div class="card-body p-4">
                                 <h4 class="card-title">
+                                    {{-- judul postingan dengan h1 pertama dari isi postingan --}}
                                     @php
-                                        $postingan = strip_tags($item->judul);
-                                        echo Str::limit($postingan, 50);
-                                    @endphp</p>
+                                        $htmlContent = $item->postingan;
+                                        preg_match('/<h1>(.*?)<\/h1>/s', $htmlContent, $match);
+                                        if (empty($match)) {
+                                            $judul = 'Tidak ada judul';
+                                        } else {
+                                            $raw = $match[1];
+                                            $judul = html_entity_decode(strip_tags($raw));
+                                        }
+                                    @endphp
+                                    {{ Str::limit($judul, 65) }}
                                 </h4>
 
-
+                                {{-- preview isi postingan dan hapus tag h1 pertama dari preview --}}
                                 <p class="card-text">@php
+                                    
                                     $postingan = strip_tags($item->postingan);
-                                    echo Str::limit($postingan, 100);
+                                    $preview = trim($postingan, $judul);
+                                    echo Str::limit($preview, 110);
                                 @endphp</p>
                             </div>
                             <br>

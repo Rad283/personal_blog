@@ -54,55 +54,34 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        {{ __('Tambah Kategori') }}
-                    </h2>
-
-
-                    {{-- form untuk kategori  --}}
-                    <form action="{{ route('kategori.store') }}" method="post" class="mt-6 space-y-6 text-white"
-                        enctype="multipart/form-data">
-                        @csrf
-                        <div>
-                            <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full"
-                                required autofocus autocomplete="nama" />
-
-                        </div>
-
-                        <button type="submit"
-                            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Tambah</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <div class="max-w-xl">
                         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Tambah postingan') }}
+                            {{ __('Edit postingan') }}
                         </h2>
                         {{-- form untuk postingan  --}}
-                        <form action="{{ route('post.store') }}" method="post" class="mt-12 space-y-12 text-white"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('post.update', $item) }}" method="post"
+                            class="mt-12 space-y-12 text-white" enctype="multipart/form-data">
                             @csrf
+                            @method('patch')
                             <p>Petunjuk:
-                                <br>
-                                -Heading 1 pertama akan menjadi judul dari postingan, biarkan left align jangan dirubah
-                                ke yang lain
-                                <br>
-                                -gambar pertama akan menjadi thumbnail
+                                Heading 1 pertama akan menjadi judul dari postingan dan gambar pertama akan menjadi
+                                thumbnail
                             </p>
                             <div>
-
+                                <br>
                                 <label for="kategori_id">Pilih kategori postingan</label>
                                 <select name="kategori_id" id="kategori_id" style="color:black">
-                                    @foreach ($kategori as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    <option value="{{ $item->kategori->id }}" selected>
+                                        {{ $item->kategori->nama }}
+                                    </option>
+                                    @foreach ($kategori as $kate)
+                                        @if ($kate->id !== $item->kategori->id)
+                                            <option value="{{ $kate->id }}">{{ $kate->nama }}
+                                            </option>
+                                        @endif
                                     @endforeach
 
                                 </select>
@@ -113,10 +92,12 @@
                     <div>
                     </div>
                     <textarea id="myeditorinstance" name="postingan" rows="35"> 
+                        {{ $item->postingan }}
                     </textarea>
-
+                    <br>
                     <button type="submit"
-                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Tambah</button>
+                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                        Update</button>
                     </form>
 
                 </div>

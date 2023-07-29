@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(30,30,30);">
 
-    <a class="navbar-brand mx-2" href="#">{{ $website->nama_website }}</a>
+    <a class="navbar-brand mx-2" href="{{ route('welcome') }}">{{ $website->nama_website }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

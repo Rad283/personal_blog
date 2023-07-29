@@ -31,27 +31,28 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/template', function () {
-    return view('components.template', [
-        'website' => website::first(),
-    ]);
-});
+
 Route::get('/', function () {
     return view('welcome', [
         'website' => DB::table('websites')->first(),
 
         'post' => DB::table('posts')
             ->join('kategoris', 'posts.kategori_id', '=', 'kategoris.id')
-            ->select('posts.*', 'kategoris.nama')->get()
+            ->select('posts.*', 'kategoris.nama')->latest()->get()
     ]);
 })->name('welcome');
+
+Route::view('/about', 'about', [
+    'website' => DB::table('websites')->first(),
+    'about' => DB::table('abouts')->first()
+])->name('about');
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('dashboard', [
-            'post' => post::all()
+            'post' => post::latest()->get()
         ]);
     })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -64,8 +65,3 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 Route::get('post/detail/{post}', [PostController::class, 'show'])->name('post.show');
-
-Route::view('/about', 'about', [
-    'website' => DB::table('websites')->first(),
-    'about' => DB::table('abouts')->first()
-])->name('about');

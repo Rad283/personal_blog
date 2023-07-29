@@ -16,6 +16,9 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
+                                Id
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 thumbnail
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -32,28 +35,72 @@
 
                     <tbody>
                         @foreach ($post as $item)
+                            @inject('post', 'Illuminate\Support\Str')
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img src="{{ asset('storage' . $item->thumbnail) }}" alt="" width="100px"
-                                        height="100px">
+                                    <a href="{{ route('post.show', $item->id) }}" style="color: white"
+                                        class="text-decoration-none">
+                                        {{ $item->id }}
+                                    </a>
+                                </th>
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <a href="{{ route('post.show', $item->id) }}" class="text-decoration-none">
+
+                                        @php
+                                            $htmlContent = $item->postingan;
+                                            preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', $htmlContent, $match);
+                                            if (empty($match)) {
+                                                $gambar_src = 'no-image.png';
+                                            } else {
+                                                $gambar_src = $match[1];
+                                            }
+                                            
+                                        @endphp
+                                        <img src="{{ $gambar_src }}" alt="" width="100px" height="100px">
+                                    </a>
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $item->judul }}
+                                    <a href="{{ route('post.show', $item->id) }}" class="text-decoration-none">
+
+                                        {{-- judul postingan dengan h1 pertama dari isi postingan --}}
+                                        @php
+                                            $htmlContent = $item->postingan;
+                                            preg_match('/<h1>(.*?)<\/h1>/s', $htmlContent, $match);
+                                            if (empty($match)) {
+                                                $judul = 'Tidak ada judul';
+                                            } else {
+                                                $raw = $match[1];
+                                                $judul = html_entity_decode(strip_tags($raw));
+                                            }
+                                            
+                                        @endphp
+                                        <p style="font-size: large">{{ $judul }}</p>
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $item->kategori->nama }}
 
                                 </td>
                                 <td class="px-6 py-4">
-                                    <form action="{{ route('post.destroy', $item) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                    </a>
+                                    <div class="flex flex-row  space-x-3">
+                                        <form action="{{ route('post.edit', $item) }}" method="get">
+                                            @csrf
+                                            <button class="bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                                                Edit
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('post.destroy', $item) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                                onclick="return confirm('Yakin ingin menghapus?')">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

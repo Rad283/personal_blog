@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class post extends Model
 {
     use HasFactory;
-    protected $fillable = ['judul', 'thumbnail', 'kategori_id', 'postingan'];
+    protected $fillable = ['kategori_id', 'postingan'];
 
     public function kategori(): BelongsTo
     {

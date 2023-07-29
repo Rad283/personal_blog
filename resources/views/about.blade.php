@@ -2,7 +2,7 @@
 @section('content')
     <main>
         <br>
-        <div class="container-fluid">
+        <div class="container">
             <div class="card" style="background-color: #2d2d30">
                 <div class="card-body">
                     <center>

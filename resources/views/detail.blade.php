@@ -5,21 +5,25 @@
     <div class="container">
         <div class="card" style="background-color: #2d2d30">
             <div class="card-body">
-                @php
-                    $timestamp = $post->created_at;
-                    echo 'Posted at: ' . date('jS F , Y', strtotime($timestamp));
-                @endphp
-                <center>
+                <div class="row ">
 
-                    <h1>{{ $post->judul }}</h1>
+                    <div class="col-md-6">
+                        @php
+                            $timestamp = $post->created_at;
+                            echo 'Posted at: ' . date('j F , Y', strtotime($timestamp));
+                        @endphp
+                    </div>
 
-                    <img src="{{ asset('storage' . $post->thumbnail) }}" class="img-fluid" style="max-height: 350px">
-                </center>
-                <br>
-                <br>
+                    <div class="col-md-6">
+                        <div style="text-align: end">
+                            <button type="button" class="btn btn-outline-primary">{{ $post->kategori->nama }}</button>
+                        </div>
+                    </div>
+
+                </div>
 
                 {!! $post->postingan !!}
-
+                <br>
 
                 <div class="mt-1">
                     <center>

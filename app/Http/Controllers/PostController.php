@@ -32,12 +32,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('thumbnail')->store('public/thumbnail');
-        $final_path = ltrim($path, 'public');
 
         post::create([
-            'judul' => $request->judul,
-            'thumbnail' => $final_path,
             'kategori_id' => $request->kategori_id,
             'postingan' => $request->postingan
         ]);
@@ -61,7 +57,10 @@ class PostController extends Controller
      */
     public function edit(post $post)
     {
-        //
+        return view('website.edit_post', [
+            'item' => $post,
+            'kategori' => kategori::all()
+        ]);
     }
 
     /**
@@ -69,7 +68,12 @@ class PostController extends Controller
      */
     public function update(Request $request, post $post)
     {
-        //
+        $post->update([
+            'kategori_id' => $request->kategori_id,
+            'postingan' => $request->postingan
+        ]);
+
+        return to_route('dashboard');
     }
 
     /**
