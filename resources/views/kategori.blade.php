@@ -16,7 +16,7 @@
            
       
             
-        <div class="position-absolute top-50 start-50 translate-middle text-light" style="font-size: xx-large">Kosong ¯\_(ツ)_/¯</div>
+        <div  style="font-size: xx-large;text-align:center;margin-top:30vh;">Kosong ¯\_(ツ)_/¯</div>
                 
             @else
             <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
