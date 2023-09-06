@@ -48,6 +48,7 @@ class PostController extends Controller
     {
         return view('detail', [
             'website' => DB::table('websites')->first(),
+            'kategori' => DB::table('kategoris')->get(),
             'post' => $post
         ]);
     }

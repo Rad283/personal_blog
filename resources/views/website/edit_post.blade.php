@@ -1,6 +1,10 @@
 <x-app-layout>
     <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
-
+    <script>
+        window.onbeforeunload = function() {
+            return "Gambar postignan tidak akan tersimpan";
+        }
+    </script>
     <script>
         tinymce.init({
             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
@@ -49,61 +53,92 @@
     </script>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tambah postingan') }}
+            {{ __('Edit postingan') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                    <div class="max-w-xl">
-                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Edit postingan') }}
-                        </h2>
-                        {{-- form untuk postingan  --}}
-                        <form action="{{ route('post.update', $item) }}" method="post"
-                            class="mt-12 space-y-12 text-white" enctype="multipart/form-data">
-                            @csrf
-                            @method('patch')
-                            <p>Petunjuk:
-                                Heading 1 pertama akan menjadi judul dari postingan dan gambar pertama akan menjadi
-                                thumbnail
-                            </p>
-                            <div>
-                                <br>
-                                <label for="kategori_id">Pilih kategori postingan</label>
-                                <select name="kategori_id" id="kategori_id" style="color:black">
-                                    <option value="{{ $item->kategori->id }}" selected>
-                                        {{ $item->kategori->nama }}
-                                    </option>
-                                    @foreach ($kategori as $kate)
-                                        @if ($kate->id !== $item->kategori->id)
-                                            <option value="{{ $kate->id }}">{{ $kate->nama }}
-                                            </option>
-                                        @endif
-                                    @endforeach
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                        {{ __('Edit postingan') }}
+                    </h2>
+                    {{-- form untuk postingan  --}}
+                    <form action="{{ route('post.update', $item) }}" method="post" class="mt-12 space-y-12 text-white"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('patch')
+                        <p>Petunjuk:
+                            <br>
+                            -Heading 1 pertama akan menjadi judul dari postingan
+                            <br>
+                            -gambar pertama akan menjadi thumbnail
+                            <br>
+                            -Refresh page akan menyebabkan gambar ERROR!!!
+                        </p>
+                        <div>
+                            <br>
+                            <label for="kategori_id">Pilih kategori postingan</label>
+                            <select name="kategori_id" id="kategori_id" style="color:black">
+                                <option value="
+                                @if($item->kategori == null){
+                                    null
+                                }
+                                @else{
+                                    {{$item->kategori->id }}
+                                }
+                                @endif
+                                " selected>
+                                @if($item->kategori == null)
+                                    null
+                                
+                                @else
+                                    {{$item->kategori->nama }}
+                                
+                                @endif
+                            </option>
+                                <option value="
+                                @if($item->kategori == null){
+                                    null
+                                }
+                                @else{
+                                    {{$item->kategori->nama }}
+                                }
+                                @endif
+                                  
+                                </option>
+                                @foreach ($kategori as $kate)
+                                @if($item->kategori == null){
+                                    <option value="{{ $kate->id }}">{{ $kate->nama }}
+                                        </option>
+                                }
+                                    @elseif ($kate->id !== $item->kategori->id)
+                                        <option value="{{ $kate->id }}">{{ $kate->nama }}
+                                        </option>
+                                    @endif
+                                @endforeach
 
-                                </select>
-                            </div>
-                    </div>
-                    <br>
+                            </select>
+                        </div>
+                </div>
+                <br>
 
-                    <div>
-                    </div>
-                    <textarea id="myeditorinstance" name="postingan" rows="35"> 
+                <div>
+                </div>
+                <textarea id="myeditorinstance" name="postingan" rows="35"> 
                         {{ $item->postingan }}
                     </textarea>
-                    <br>
-                    <button type="submit"
-                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                        Update</button>
-                    </form>
+                <br>
+                <button type="submit"
+                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                    Update</button>
+                </form>
 
-                </div>
             </div>
         </div>
     </div>
+
     {{-- buat nampilin gambar yang baru diupload --}}
     <script type="text/javascript">
         thumbnail.onchange = evt => {

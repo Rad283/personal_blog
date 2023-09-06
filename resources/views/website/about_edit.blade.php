@@ -1,6 +1,10 @@
 <x-app-layout>
     <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
-
+    <script>
+        window.onbeforeunload = function() {
+            return "Gambar postignan tidak akan tersimpan";
+        }
+    </script>
     <script>
         tinymce.init({
             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
@@ -77,6 +81,14 @@
                         </div>
                         <br>
                         <br>
+                        <p>Petunjuk:
+                            <br>
+                            -Heading 1 pertama akan menjadi judul dari postingan
+                            <br>
+                            -gambar pertama akan menjadi thumbnail
+                            <br>
+                            -Refresh page akan menyebabkan gambar ERROR!!!
+                        </p>
                         <center>
                             <label for="myeditorinstance">Isi tentang diri anda</label>
                         </center>

@@ -48,7 +48,9 @@ class KategoriController extends Controller
      */
     public function edit(kategori $kategori)
     {
-        //
+        return view('website.edit_kategori', [
+            'kategori' => $kategori,
+        ]);
     }
 
     /**
@@ -56,7 +58,11 @@ class KategoriController extends Controller
      */
     public function update(Request $request, kategori $kategori)
     {
-        //
+        $kategori->update([
+            'nama' => $request->nama
+        ]);
+        
+        return to_route('post.create');
     }
 
     /**
@@ -64,6 +70,7 @@ class KategoriController extends Controller
      */
     public function destroy(kategori $kategori)
     {
-        //
+        $kategori->delete();
+        return to_route('dashboard');
     }
 }

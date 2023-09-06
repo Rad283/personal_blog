@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LandingPage;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use App\Models\about;
+use App\Models\kategori;
 use App\Models\post;
 use App\Models\website;
 use Illuminate\Support\Facades\DB;
@@ -31,23 +33,14 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+// Landing page 
+Route::get('/', [LandingPage::class, 'welcome'])->name('welcome');
 
-Route::get('/', function () {
-    return view('welcome', [
-        'website' => DB::table('websites')->first(),
-
-        'post' => DB::table('posts')
-            ->join('kategoris', 'posts.kategori_id', '=', 'kategoris.id')
-            ->select('posts.*', 'kategoris.nama')->latest()->get()
-    ]);
-})->name('welcome');
-
-Route::view('/about', 'about', [
-    'website' => DB::table('websites')->first(),
-    'about' => DB::table('abouts')->first()
-])->name('about');
+// about page 
+Route::get('/about', [LandingPage::class, 'about'])->name('about');
 
 
+// admin page 
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
@@ -64,4 +57,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('post', PostController::class)->except(['show']);
 });
 
+// to see post detail 
 Route::get('post/detail/{post}', [PostController::class, 'show'])->name('post.show');
+
+// kategori     
+Route::get('kategori/{id}', [LandingPage::class, 'kategori'])->name('kategori');

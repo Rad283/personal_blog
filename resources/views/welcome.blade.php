@@ -1,15 +1,15 @@
 @extends('layouts.template')
 @section('content')
-    <header class="headerimg" style="background-image: url({{ asset('storage' . $website->header_image) }});">
-        <img src="{{ asset('storage' . $website->header_image) }}" class="responsive" />
-    </header>
-    <p style="background-color: rgb(30,30,30);width: auto;height: auto;">
+    <img class="background" style="background-image: url({{ asset('storage' . $website->header_image) }});">
+        <img src="{{ asset('storage' . $website->header_image) }}" class="responsive">
+    
+    <div style="background-color: rgb(30,30,30);width: auto;height: auto;">
         ㅤ
-    </p>
+    </div>
+
+    <div style="background-color:#252526;color: white;">
     <div class="container">
-        <center>
-            <h2>welcome to my website</h2>
-        </center>
+        
         <br>
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
 
@@ -38,14 +38,14 @@
                                     {{-- judul postingan dengan h1 pertama dari isi postingan --}}
                                     @php
                                         $htmlContent = $item->postingan;
-                                        preg_match('/<h1>(.*?)<\/h1>/s', $htmlContent, $match);
-                                        if (empty($match)) {
-                                            $judul = 'Tidak ada judul';
-                                        } else {
-                                            $raw = $match[1];
-                                            $judul = html_entity_decode(strip_tags($raw));
-                                        }
-                                    @endphp
+                                    preg_match('/<h1[.]?[style="]?(.*?)]@endphp(.*?)?<\/h1>/s', $htmlContent, $match);
+if (empty($match)) {
+    $judul = 'Tidak ada judul';
+} else {
+    $raw = $match[2];
+    $judul = html_entity_decode(strip_tags($raw));
+}
+?>
                                     {{ Str::limit($judul, 65) }}
                                 </h4>
 
@@ -55,7 +55,8 @@
                                     $postingan = strip_tags($item->postingan);
                                     $preview = trim($postingan, $judul);
                                     echo Str::limit($preview, 110);
-                                @endphp</p>
+                                @endphp
+                                </p>
                             </div>
                             <br>
                             <br>
@@ -65,7 +66,14 @@
                             width: 100%;
                             ">
                                 <center>
+                                    @if ($item->nama == null) 
+                                    <button>Kosong</button>  
+                                 
+                                    
+                                    @else 
                                     <p class="text-primary">{{ $item->nama }}</p>
+                                    @endif
+                                    
                                 </center>
                             </div>
 
@@ -82,4 +90,6 @@
     </div>
     <br>
     <br>
+</div>
 @endsection
+

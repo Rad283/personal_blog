@@ -67,21 +67,28 @@
                                         {{-- judul postingan dengan h1 pertama dari isi postingan --}}
                                         @php
                                             $htmlContent = $item->postingan;
-                                            preg_match('/<h1>(.*?)<\/h1>/s', $htmlContent, $match);
-                                            if (empty($match)) {
-                                                $judul = 'Tidak ada judul';
-                                            } else {
-                                                $raw = $match[1];
-                                                $judul = html_entity_decode(strip_tags($raw));
-                                            }
-                                            
-                                        @endphp
+                                        preg_match('/<h1[.]?[style="]?(.*?)]@endphp(.*?)?<\/h1>/s', $htmlContent, $match);
+if (empty($match)) {
+    $judul = 'Tidak ada judul';
+} else {
+    $raw = $match[2];
+    $judul = html_entity_decode(strip_tags($raw));
+}
+
+?>
                                         <p style="font-size: large">{{ $judul }}</p>
                                     </a>
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->kategori->nama }}
 
+                                    @if ($item->kategori == null) 
+                                    <button style="color: white" class="bg-red-700 py-2 px-4">Kosong</button>  
+                                 
+                                    
+                                    @else 
+                                       {{$item->kategori->nama}} 
+                                    
+@endif
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex flex-row  space-x-3">

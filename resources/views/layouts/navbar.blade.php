@@ -20,8 +20,10 @@
                     ㅤKategori
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:rgb(45,45,48);">
-                    <a class="dropdown-item" href="#" style="color: white">Action</a>
-                    <a class="dropdown-item" href="#" style="color: white">Another action</a>
+                    @foreach ($kategori as $item)
+                        <a class="dropdown-item" href="{{ route('kategori', $item->id) }}"
+                            style="color: white">{{ $item->nama }}</a>
+                    @endforeach
 
                 </div>
             </li>
