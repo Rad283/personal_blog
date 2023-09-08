@@ -9,6 +9,7 @@
     <script>
         tinymce.init({
             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+            content_style:"body{font-size:14pt;}",
             plugins: 'code table lists | image | link',
             toolbar: 'undo redo | formatselect |fontfamily fontsize blocks bold italic alignleft aligncenter alignright alignjustify indent outdent | bullist numlist | image link |table| code ',
             promotion: false,
@@ -157,11 +158,11 @@
                             <label for="kategori_id">Pilih kategori postingan</label>
 
                             <details class="dropdown w-60">
-                                <summary class="m-1 btn">Pilih Kategori</summary>
+                                <summary class="m-1 btn">Wajib Pilih Kategori</summary>
                                 <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                                     @foreach ($kategori as $item)
                                         <div class="flex flex-row  space-x-3">
-                                            <li><input type="radio" name="kategori_id" value="{{ $item->id }}">
+                                            <li><input type="radio" name="kategori_id" value="{{ $item->id }}" required>
                                                 {{ $item->nama }}</li>
                                         </div>
                                     @endforeach

@@ -8,6 +8,7 @@
     <script>
         tinymce.init({
             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+            content_style:"body{font-size:14pt;}",
             plugins: 'code table lists | image | link',
             toolbar: 'undo redo | formatselect |fontfamily fontsize blocks bold italic alignleft aligncenter alignright alignjustify indent outdent | bullist numlist | image link |table| code ',
             promotion: false,
@@ -82,32 +83,22 @@
                             <label for="kategori_id">Pilih kategori postingan</label>
                             <select name="kategori_id" id="kategori_id" style="color:black">
                                 <option value="
-                                @if($item->kategori == null){
+                                @if($item->kategori == null)
                                     null
-                                }
-                                @else{
-                                    {{$item->kategori->id }}
-                                }
+                                
+                                @else
+                                    {{$item->kategori->id}}
+                                
                                 @endif
                                 " selected>
                                 @if($item->kategori == null)
                                     null
                                 
                                 @else
-                                    {{$item->kategori->nama }}
+                                    {{$item->kategori->nama}}
                                 
                                 @endif
                             </option>
-                                <option value="
-                                @if($item->kategori == null){
-                                    null
-                                }
-                                @else{
-                                    {{$item->kategori->nama }}
-                                }
-                                @endif
-                                  
-                                </option>
                                 @foreach ($kategori as $kate)
                                 @if($item->kategori == null){
                                     <option value="{{ $kate->id }}">{{ $kate->nama }}

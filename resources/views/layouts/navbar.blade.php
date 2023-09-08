@@ -19,7 +19,7 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Kategori
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:rgb(45,45,48);">
+                <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown2" >
                     @foreach ($kategori as $item)
                         <a class="dropdown-item" href="{{ route('kategori', $item->id) }}"
                             style="color: white">{{ $item->nama }}</a>
@@ -37,9 +37,8 @@
                 </li>
             @endauth
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" aria-label="Search">
-
+        <form class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="GET">
+            <input class="form-control mr-sm-2" type="search" aria-label="Search" name="cari">
             <button class="btn my-2" type="submit"
                 style="background-color: rgb(166, 2, 166);color: white;">Search</button>
             ㅤ

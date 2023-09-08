@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class LandingPage extends Controller
 {
@@ -14,9 +15,7 @@ class LandingPage extends Controller
         return view('welcome', [
             'website' => DB::table('websites')->first(),
             'kategori' => DB::table('kategoris')->get(),
-            'post' => DB::table('posts')
-                ->join('kategoris', 'posts.kategori_id', '=', 'kategoris.id')
-                ->select('posts.*', 'kategoris.nama')->latest()->get()
+            'post' => post::with('kategori')->latest()->paginate(6)
         ]);
     }
 
@@ -32,25 +31,31 @@ class LandingPage extends Controller
     public function kategori($id)
     {
 
-        if (post::where('kategori_id', $id)->exists()) {
-            $post = DB::table('posts')
-                ->join('kategoris', 'posts.kategori_id', '=', 'kategoris.id')
-                ->select('posts.*', 'kategoris.nama')
-                ->where('kategori_id', '=', $id)
-                ->latest()->get();
-            $bol = TRUE;
-        } else {
-            $post = [];
-            $bol = FALSE;
-        }
+       
+            $post = post::with('kategori')->where('kategori_id','=',$id)->latest()->paginate(6);
+         
+     
         $namakategori= DB::table('kategoris')->where('id','=',$id)->first();
         return view('kategori', [
             'website' => DB::table('websites')->first(),
             'kategori' => DB::table('kategoris')->get(),
             'namakategori'=>$namakategori,
             'post' => $post,
-            'bol' => $bol
+           
 
         ]);
     }
+
+public function search(Request $request){
+   
+    $hasil = post::with('kategori')->where(DB::raw('LEFT(postingan,150)'),'like','%'.$request->cari.'%')->latest()->paginate();
+
+    return view('search',[
+        'post'=>$hasil,
+        'website' => DB::table('websites')->first(),
+        'kategori' => DB::table('kategoris')->get(),
+        'search' => $request->cari
+    ]);
+}
+
 }

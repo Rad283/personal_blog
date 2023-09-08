@@ -4,20 +4,21 @@
         <center>
             <br>
         
-         <h2>{{$namakategori->nama}}</h2>
         
-          
-           
+           <h5>Menampilkan hasil untuk: {{$search}}</h5>
             
         </center>
         <br>
         @if(sizeof($post)==0)
         <div  style="font-size: xx-large;text-align:center;margin-top:30vh;">Kosong ¯\_(ツ)_/¯</div>
             
+        @else
+       
+           
       
             
                 
-            @else
+          
             <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
 
             @foreach ($post as $item)
@@ -83,7 +84,7 @@
                 </div>
             </div>
         @endforeach
-        @endif
+       @endif
         
            
         </div>

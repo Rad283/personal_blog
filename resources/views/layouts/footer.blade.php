@@ -1,6 +1,6 @@
 <footer class="text-center text-white p-4"
     style="background-color: rgb(30,30,30)";>
-    <p>Reach me on</p>
+   
     <!-- Grid container -->
 
     <!-- Section: Social media -->
