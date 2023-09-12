@@ -3,8 +3,8 @@
     <img class="background" style="background-image: url({{ asset('storage' . $website->header_image) }});">
         <img src="{{ asset('storage' . $website->header_image) }}" class="responsive">
     
-    <div style="background-color: rgb(30,30,30);width: auto;height: auto;">
-        ㅤ
+    <div style="background-color: rgb(30,30,30);width: auto;height: auto;" >
+        
     </div>
 
     <div style="background-color:#252526;color: white;">

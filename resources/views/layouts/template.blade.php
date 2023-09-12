@@ -12,20 +12,6 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/Articles-Cards-images.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/Navbar-Right-Links-Dark-icons.css') }}">
-    <style>
-        img.background {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        z-index: -1;
-        width: 100%;
-        height: 60vh;
-        -webkit-filter: blur(7px); /* Safari 6.0 - 9.0 */
-        filter: blur(7px);
-        background-size: cover
-        }
-        
-        </style>
 
 </head>
 
