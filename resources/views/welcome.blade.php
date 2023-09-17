@@ -1,5 +1,6 @@
 @extends('layouts.template')
 @section('content')
+
     <img class="background" style="background-image: url({{ asset('storage' . $website->header_image) }});">
         <img src="{{ asset('storage' . $website->header_image) }}" class="responsive">
     
