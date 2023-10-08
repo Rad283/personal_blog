@@ -33,6 +33,7 @@
                         </tr>
                     </thead>
 
+
                     <tbody>
                         @foreach ($post as $item)
                             @inject('post', 'Illuminate\Support\Str')

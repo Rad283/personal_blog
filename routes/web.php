@@ -63,4 +63,4 @@ Route::get('post/detail/{post}', [PostController::class, 'show'])->name('post.sh
 // kategori     
 Route::get('kategori/{id}', [LandingPage::class, 'kategori'])->name('kategori');
 
-Route::get('search/',[LandingPage::class,'search'])->name('search');
+Route::get('search/', [LandingPage::class, 'search'])->name('search');
