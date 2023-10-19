@@ -158,7 +158,7 @@
                             <label for="kategori_id">Pilih kategori postingan</label>
 
                             <details class="dropdown w-60">
-                                <summary class="m-1 btn">Wajib Pilih Kategori</summary>
+                                <summary class="m-1 btn">Pilih Kategori</summary>
                                 <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                                     @foreach ($kategori as $item)
                                         <div class="flex flex-row  space-x-3">

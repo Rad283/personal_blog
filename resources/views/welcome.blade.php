@@ -40,12 +40,12 @@
                                     @php
                                         $htmlContent = $item->postingan;
                                     preg_match('/<h1[.]?[style="]?(.*?)]@endphp(.*?)?<\/h1>/s', $htmlContent, $match);
-if (empty($match)) {
-    $judul = 'Tidak ada judul';
-} else {
-    $raw = $match[2];
-    $judul = html_entity_decode(strip_tags($raw));
-}
+                                if (empty($match)) {
+                                $judul = 'Tidak ada judul';
+                                } else {
+                                $raw = $match[2];
+                                $judul = html_entity_decode(strip_tags($raw));
+                                }
 ?>
                                     {{ Str::limit($judul, 65) }}
                                 </h4>
@@ -56,7 +56,7 @@ if (empty($match)) {
                                     
                                     $postingan = strip_tags($item->postingan);
                                     $preview = trim($postingan, $judul);
-                                    echo Str::limit($preview, 110);
+                                    echo Str::limit($preview, 115);
                                 @endphp
                              
                                 </p>

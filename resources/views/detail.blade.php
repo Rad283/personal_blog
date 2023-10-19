@@ -25,14 +25,15 @@
                 {!! $post->postingan !!}
                 <br>
 
-                <div class="mt-1">
-                    <center>
-                        <a href="{{ url()->previous() }}" class="btn"
-                            style="background-color: rgb(166, 2, 166);color:white">Back</a>
-                    </center>
-                </div>
-
+                
             </div>
+            <div class="my-2">
+                <center>
+                    <a href="{{ url()->previous() }}" class="btn"
+                        style="background-color: rgb(166, 2, 166);color:white">Back</a>
+                </center>
+            </div>
+
 
         </div>
     </div>
