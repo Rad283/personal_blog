@@ -154,21 +154,18 @@
 
 
 
-
                             <label for="kategori_id">Pilih kategori postingan</label>
-
-                            <details class="dropdown w-60">
-                                <summary class="m-1 btn">Pilih Kategori</summary>
-                                <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                <select name="kategori_id" style="background-color: gray;color:white">     
                                     @foreach ($kategori as $item)
                                         <div class="flex flex-row  space-x-3">
-                                            <li><input type="radio" name="kategori_id" value="{{ $item->id }}" required>
-                                                {{ $item->nama }}</li>
+                                            <li><option value="{{ $item->id }}" required>
+                                                {{ $item->nama }}</option>
                                         </div>
                                     @endforeach
-
-                                </ul>
-                            </details>
+                                </select>
+                              
+                        <br>
+                        <br>
 
                     </div>
                     <div>
