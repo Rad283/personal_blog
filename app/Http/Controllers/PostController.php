@@ -49,6 +49,7 @@ class PostController extends Controller
         return view('detail', [
             'website' => DB::table('websites')->first(),
             'kategori' => DB::table('kategoris')->get(),
+            'recomendedPost' => post::with('kategori')->whereNot('id', '=', $post->id)->inRandomOrder()->paginate(8),
             'post' => $post
         ]);
     }

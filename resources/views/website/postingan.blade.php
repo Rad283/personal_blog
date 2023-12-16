@@ -9,7 +9,7 @@
     <script>
         tinymce.init({
             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
-            content_style:"body{font-size:14pt;}",
+            content_style: "body{font-size:14pt;}",
             plugins: 'code table lists | image | link',
             toolbar: 'undo redo | formatselect |fontfamily fontsize blocks bold italic alignleft aligncenter alignright alignjustify indent outdent | bullist numlist | image link |table| code ',
             promotion: false,
@@ -81,53 +81,57 @@
                         <button type="submit"
                             class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Tambah</button>
                     </form>
-<br>
-<div style="color: white">
-                    <details class="dropdown w-60">
-                        <summary class="m-1 btn" style="font-size: larger">Edit Kategori</summary>
-                        <div class="relative overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                        
-                                <th>Nama kategori</th>
-                                <th>Aksi</th>
-                            </tr>
-                    </thead>
-                      
-                            @foreach ($kategori as $item)
-                            <tr>
-                                <td>
-                                <div class="flex flex-row  space-x-3">
-                                        {{ $item->nama }}
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-row  space-x-3">
-                                <form action="{{ route('kategori.destroy', $item) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="bg-red-700 text-white font-bold py-2 px-4 rounded"
-                                        onclick="return confirm('Yakin ingin menghapus?')">
-                                        Hapus
-                                    </button>
-                                </form>
-                                <form action="{{ route('kategori.edit', $item) }}" method="get">
-                                    @csrf
-                                    <button class="bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                                        Edit
-                                    </button>
-                                </form>
-                                </div>
-                            </td>
-                            </tr>
-                            @endforeach
-                        </table>
+                    <br>
+                    <div style="color: white">
+                        <details class="dropdown w-25">
+                            <summary class="m-1 btn" style="font-size: larger">Edit Kategori</summary>
+                            <div class="relative overflow-x-auto">
+                                <table class=" text-sm text-left text-gray-500 dark:text-gray-400">
+                                    <thead
+                                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
 
-                      
-                        <div class="relative overflow-x-auto">
-                    </details>
-                </div>
+                                            <th>Nama kategori</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    @foreach ($kategori as $item)
+                                        <tr>
+                                            <td>
+                                                <div class="flex flex-row  space-x-3">
+                                                    {{ $item->nama }}
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <div class="flex flex-row  space-x-3">
+                                                    <form action="{{ route('kategori.destroy', $item) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button
+                                                            class="bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                                            onclick="return confirm('Yakin ingin menghapus?')">
+                                                            Hapus
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('kategori.edit', $item) }}" method="get">
+                                                        @csrf
+                                                        <button
+                                                            class="bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                                                            Edit
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+
+
+                                <div class="relative overflow-x-auto">
+                        </details>
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,17 +159,18 @@
 
 
                             <label for="kategori_id">Pilih kategori postingan</label>
-                                <select name="kategori_id" style="background-color: gray;color:white">     
-                                    @foreach ($kategori as $item)
-                                        <div class="flex flex-row  space-x-3">
-                                            <li><option value="{{ $item->id }}" required>
+                            <select name="kategori_id" style="background-color: gray;color:white">
+                                @foreach ($kategori as $item)
+                                    <div class="flex flex-row  space-x-3">
+                                        <li>
+                                            <option value="{{ $item->id }}" required>
                                                 {{ $item->nama }}</option>
-                                        </div>
-                                    @endforeach
-                                </select>
-                              
-                        <br>
-                        <br>
+                                    </div>
+                                @endforeach
+                            </select>
+
+                            <br>
+                            <br>
 
                     </div>
                     <div>

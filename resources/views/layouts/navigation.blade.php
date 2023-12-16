@@ -20,7 +20,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">
-                        {{ __('Buat postingan') }}
+                        {{ __('Buat postingan/kategori') }}
                     </x-nav-link>
                     <x-nav-link :href="route('website.edit', 1)" :active="request()->routeIs('website.edit')">
                         {{ __('Edit website') }}
@@ -95,7 +95,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">
-                {{ __('buat postingan') }}
+                {{ __('buat postingan/kategori') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('website.edit', 1)" :active="request()->routeIs('website.edit', 1)">
                 {{ __('Edit website') }}

@@ -93,6 +93,9 @@ if (empty($match)) {
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex flex-row  space-x-3">
+                                        <a class="btn bg-green-700 text-white font-bold py-2 px-4 rounded" href="{{ route('post.show', $item->id) }}">
+                                                Lihat
+                                            </a>
                                         <form action="{{ route('post.edit', $item) }}" method="get">
                                             @csrf
                                             <button class="bg-yellow-700 text-white font-bold py-2 px-4 rounded">

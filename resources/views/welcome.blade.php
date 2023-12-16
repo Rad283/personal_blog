@@ -38,25 +38,24 @@
                                 <h4 class="card-title">
                                     {{-- judul postingan dengan h1 pertama dari isi postingan --}}
                                     @php
-                                        $htmlContent = $item->postingan;
-                                    preg_match('/<h1[.]?[style="]?(.*?)]@endphp(.*?)?<\/h1>/s', $htmlContent, $match);
-                                if (empty($match)) {
-                                $judul = 'Tidak ada judul';
-                                } else {
-                                $raw = $match[2];
-                                $judul = html_entity_decode(strip_tags($raw));
-                                }
-?>
+                                    $htmlContent = $item->postingan;
+                                    preg_match('/<h1[.]?[style="]?(.*?)]?>(.*?)?<\/h1>/s', $htmlContent, $match);
+                                    if (empty($match)) {
+                                    $judul = 'Tidak ada judul';
+                                    } else {
+                                    $raw = $match[2];
+                                    $judul = html_entity_decode(strip_tags($raw));
+                                    }
+                                     @endphp
                                     {{ Str::limit($judul, 65) }}
                                 </h4>
 
                               
                                 <p class="card-text">
                                 @php
-                                    
-                                    $postingan = strip_tags($item->postingan);
-                                    $preview = trim($postingan, $judul);
-                                    echo Str::limit($preview, 115);
+                                $postingan = strip_tags($item->postingan);
+                                $preview = trim($postingan, $judul);
+                                echo Str::limit($preview, 115);
                                 @endphp
                              
                                 </p>

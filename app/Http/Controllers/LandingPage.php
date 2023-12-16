@@ -31,31 +31,30 @@ class LandingPage extends Controller
     public function kategori($id)
     {
 
-       
-            $post = post::with('kategori')->where('kategori_id','=',$id)->latest()->paginate(6);
-         
-     
-        $namakategori= DB::table('kategoris')->where('id','=',$id)->first();
+        $post = post::with('kategori')->where('kategori_id', '=', $id)->latest()->paginate(6);
+
+
+        $namakategori = DB::table('kategoris')->where('id', '=', $id)->first();
         return view('kategori', [
             'website' => DB::table('websites')->first(),
             'kategori' => DB::table('kategoris')->get(),
-            'namakategori'=>$namakategori,
+            'namakategori' => $namakategori,
             'post' => $post,
-           
+
 
         ]);
     }
 
-public function search(Request $request){
-   
-    $hasil = post::with('kategori')->where(DB::raw('LEFT(postingan,150)'),'like','%'.$request->cari.'%')->latest()->paginate();
+    public function search(Request $request)
+    {
 
-    return view('search',[
-        'post'=>$hasil,
-        'website' => DB::table('websites')->first(),
-        'kategori' => DB::table('kategoris')->get(),
-        'search' => $request->cari
-    ]);
-}
+        $hasil = post::with('kategori')->where(DB::raw('LEFT(postingan,150)'), 'like', '%' . $request->cari . '%')->latest()->paginate();
 
+        return view('search', [
+            'post' => $hasil,
+            'website' => DB::table('websites')->first(),
+            'kategori' => DB::table('kategoris')->get(),
+            'search' => $request->cari
+        ]);
+    }
 }
