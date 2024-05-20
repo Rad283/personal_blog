@@ -36,6 +36,11 @@
                     <a class="nav-link mx-1" href="{{ route('dashboard') }}">Dashboard Admin</a>
                 </li>
             @endauth
+            @guest
+            <li class="nav-item">
+                <a class="nav-link mx-1" href="{{ route('login') }}">Login</a>
+            </li>
+            @endguest
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="GET">
             <input class="form-control mr-sm-2" type="search" aria-label="Search" name="cari">

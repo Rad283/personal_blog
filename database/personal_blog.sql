@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2023 at 09:37 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 20, 2024 at 02:52 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -186,7 +186,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'wjdozky', 'ayamgoreng021021@gmail.com', NULL, '$2y$10$KMax8GtEsN1yrrdQly4GRODYSt6WCjiYn1HA9RkMQMH8GLrYyyvua', NULL, '2023-07-27 11:17:28', '2023-07-27 11:17:28');
+(1, 'admin', 'admintestingpurplegem@gmail.com', NULL, '$2y$10$J9kNi7zs60eoqrCh1y9h2ekO6gRaF.YxawOHX65oy67Y1XvdXs.9K', NULL, '2023-07-27 11:17:28', '2024-05-20 05:52:28');
 
 -- --------------------------------------------------------
 
@@ -208,7 +208,7 @@ CREATE TABLE `websites` (
 --
 
 INSERT INTO `websites` (`id`, `created_at`, `updated_at`, `nama_website`, `header_image`, `github_link`) VALUES
-(1, NULL, '2023-09-04 16:18:45', 'Rad', '/TM8O0HqGrbF2CJ6F3T3R8yaIy6qG8H0hjn7qx1Ku.png', 'https://github.com/Rad283');
+(1, NULL, '2024-05-20 05:51:16', 'Rad', '0', 'https://github.com/Rad283');
 
 --
 -- Indexes for dumped tables

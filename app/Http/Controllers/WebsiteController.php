@@ -59,7 +59,7 @@ class WebsiteController extends Controller
 
 
 
-        if ($request->header_image !== null) {
+        if ($request->header_image !== false) {
             Storage::delete('public/' . $website->header_image);
             $path = $request->file('header_image')->store('public');
             $final_path = ltrim($path, 'public');
@@ -82,6 +82,12 @@ class WebsiteController extends Controller
      */
     public function destroy(website $website)
     {
-        //
+        $website->update(
+            [
+                "header_image" => false
+            ]
+            );
+        return to_route('dashboard');
+  
     }
 }

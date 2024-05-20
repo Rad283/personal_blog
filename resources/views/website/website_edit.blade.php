@@ -26,20 +26,35 @@
                                 :value="old('nama', $website->nama_website)" required autofocus autocomplete="name" />
 
                         </div>
+                       
                         <div>
                             <label for="load">Header website (ukuran 1500x500)</label>
                             <img id="load" src="{{ asset('storage/' . $website->header_image) }}" alt="your image"
                                 style="max-height: 250px;" />
                             <input accept="image/*" type='file' id="header_image" name="header_image" />
+                           
+                           
                         </div>
+                        <br>
                         <div>
                             <x-input-label for="github_link" :value="__('Link github')" />
                             <x-text-input id="github_link" name="github_link" type="text" class="mt-1 block w-full"
                                 :value="old('github_link', $website->github_link)" required autofocus autocomplete="github_link" />
 
                         </div>
+                        <br>
                         <button type="submit"
                             class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Update</button>
+                    </form>
+                    <br>
+                    <br>
+                    <form action="{{ route('website.destroy', $website) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('delete')
+                        <button class="bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            onclick="return confirm('Yakin ingin menghapus?')">
+                            Hapus Header
+                        </button>
                     </form>
                 </div>
             </div>
